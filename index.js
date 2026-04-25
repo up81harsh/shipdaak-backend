@@ -9,6 +9,12 @@ app.post("/webhook/order", async (req, res) => {
     const rawPincode = order.shipping_address?.zip || "";
     const cleanPincode = rawPincode.toString().replace(/\D/g, "");
     const finalPincode = cleanPincode.length === 6 ? cleanPincode : "110001";
+
+    const rawPhone = order.shipping_address?.phone || "";
+    const cleanPhone = rawPhone.toString().replace(/\D/g, "");
+    const finalPhone = cleanPhone.length >= 10 
+    ? cleanPhone.slice(-10) 
+    : "9999999999";
     try {
         const tokenRes = await axios.post(
             "https://api.shipdaak.com/v1/auth/token",
@@ -40,7 +46,7 @@ app.post("/webhook/order", async (req, res) => {
                     city: order.shipping_address?.city,
                     state: order.shipping_address?.province,
                     pincode: finalPincode,
-                    phone: (order.shipping_address?.phone || "9999999999").replace(/\D/g, "").slice(0, 10)
+                    phone: finalPhone
                 },
 
                 order_items: order.line_items.map(item => ({
