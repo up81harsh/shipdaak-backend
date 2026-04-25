@@ -39,7 +39,9 @@ app.post("/webhook/order", async (req, res) => {
                 courier: 8, // change if needed
                 pickup_warehouse: 1,
                 rto_warehouse: 1,
-
+                
+                is_shipment_created: true,
+                
                 consignee: {
                     name: order.shipping_address?.name || "Customer",
                     address1: order.shipping_address?.address1,
