@@ -30,7 +30,7 @@ app.post("/webhook/order", async (req, res) => {
         const shipmentRes = await axios.post(
             "https://api.shipdaak.com/v1/shipments/generate-shipment",
             {
-                order_no: order.id,
+                order_no: order.name || order.id.toString(),
                 pay_type: order.financial_status === "pending" ? "cod" : "prepaid",
                 weight: 500,
 
