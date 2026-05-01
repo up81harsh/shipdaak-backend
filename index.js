@@ -37,8 +37,8 @@ app.post("/webhook/order", async (req, res) => {
                 total_amount: order.total_price,
 
                 courier: 8, // change if needed
-                pickup_warehouse: 1,
-                rto_warehouse: 1,
+                pickup_warehouse: 628,
+                rto_warehouse: 628,
                 
                 is_shipment_created: "yes",
                 
